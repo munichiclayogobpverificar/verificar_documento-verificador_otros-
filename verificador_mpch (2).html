@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifica tu Documento | MPCH</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #eee; }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 0.6rem 1.5rem;
+      border-bottom: 1px solid #ddd;
+    }
+    .navbar-left { display: flex; align-items: center; gap: 0.75rem; }
+    .navbar-back {
+      color: #1a7fd4;
+      font-size: 1.4rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .navbar-logo { height: 48px; }
+    .navbar-brand { font-size: 0.85rem; color: #333; line-height: 1.3; }
+    .navbar-brand strong { display: block; }
+    .navbar-title { font-size: 1.1rem; color: #333; }
+    .navbar-title span { color: #1a7fd4; font-weight: bold; }
+
+    /* HERO */
+    .hero {
+      min-height: 500px;
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Municipalidad_de_Chiclayo.jpg/1200px-Municipalidad_de_Chiclayo.jpg')
+        center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .hero-title {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    }
+    .form-header {
+      background: #1a7fd4;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.95rem;
+    }
+    .form-body {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .form-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .form-label {
+      color: #1a7fd4;
+      font-weight: bold;
+      font-size: 0.92rem;
+      min-width: 148px;
+      text-align: right;
+    }
+    .form-control {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.92rem;
+      color: #555;
+      background: #fff;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .form-control:focus { border-color: #1a7fd4; }
+
+    /* CAPTCHA */
+    .captcha-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+    }
+    .captcha-box {
+      background: #f5f5f5;
+      border: 1.5px solid #bbb;
+      border-radius: 4px;
+      padding: 0.4rem 0.9rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      font-family: monospace;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .refresh-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #1a7fd4;
+      font-size: 1.1rem;
+      padding: 0;
+      line-height: 1;
+    }
+    .refresh-btn:hover { color: #0d5fa0; }
+
+    /* BUTTON */
+    .btn-validar {
+      margin: 0.25rem auto 0;
+      display: block;
+      background: #1a7fd4;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.6rem 2.2rem;
+      font-size: 0.97rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-validar:hover { background: #1565b0; }
+
+    /* FOOTER */
+    .page-footer {
+      background: #f5f5f5;
+      border-top: 1px solid #e0e0e0;
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    .footer-link { color: #1a7fd4; text-decoration: none; }
+    .footer-link:hover { text-decoration: underline; }
+
+    .msg-encontrado {
+      color: #28a745;
+      font-weight: bold;
+      text-align: center;
+      font-size: 0.97rem;
+      margin-top: 0.25rem;
+    }
+    #resultado-section {
+      display: none;
+      background: #f0f0f0;
+      padding: 2rem 1.5rem;
+    }
+    .resultado-titulo {
+      background: #e00000;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      letter-spacing: 0.5px;
+    }
+    .resultado-tabla-wrapper {
+      border: 1px solid #ccc;
+      border-top: none;
+      background: #fff;
+    }
+    .resultado-tabla {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .resultado-tabla td {
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+      border: 1px solid #ddd;
+      color: #333;
+    }
+    .resultado-tabla td.field-label {
+      font-weight: bold;
+      color: #222;
+      width: 18%;
+      white-space: nowrap;
+    }
+    .resultado-tabla td.field-value {
+      color: #444;
+      width: 32%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a class="navbar-back" href="#">&#8592;</a>
+      <img class="navbar-logo" src="https://drive.google.com/thumbnail?id=1yL6aH_t2I46RnFpnqRLU8YVjouBE1cA9&sz=w200" alt="Logo MPCH" onerror="this.style.display='none'" />
+      <div class="navbar-brand">
+        <strong>Municipalidad</strong>
+        Provincial de Chiclayo
+      </div>
+    </div>
+    <div class="navbar-title">
+      Sistema de Gestión Documental <span>SGD</span>
+    </div>
+  </nav>
+
+  <!-- HERO + FORM -->
+  <section class="hero">
+    <h1 class="hero-title">Verifica tu Documento | MPCH</h1>
+
+    <div class="form-card">
+      <div class="form-header">
+        Ingrese el tipo de documento y su número para visualizar el PDF asociado
+      </div>
+      <div class="form-body">
+
+        <div class="form-row">
+          <label class="form-label" for="tipo-doc">Tipo de documento:</label>
+          <select class="form-control" id="tipo-doc">
+            <option value="">Seleccione un validador</option>
+            <option value="licencia_funcionamiento_res">RESOLUCION DE LICENCIA DE FUNCIONAMIENTO</option>
+            <option value="cert_salubridad">CERTIFICADO DE SALUBRIDAD</option>
+            <option value="carnet_salud">CARNET DE SALUD</option>
+            <option value="papeleta_infraccion">DOCUMENTOS POR PAPELETA DE INFRACCIÓN (PIT)</option>
+            <option value="oficio_policial">DOCUMENTOS POR OFICIO POLICIAL – POR PLACA</option>
+            <option value="cert_conformidad_obra">CERTIFICADO DE CONFORMIDAD DE OBRA</option>
+            <option value="licencia_edificacion">LICENCIA DE EDIFICACIÓN</option>
+            <option value="tuc_transportes">TUC-TRANSPORTES</option>
+            <option value="acta_fiscalizacion">ACTA DE FISCALIZACIÓN DE TRANSPORTE (POR PLACA)</option>
+            <option value="auth_anuncios">AUTORIZACIÓN DE ANUNCIOS Y PUBLICIDAD EXTERIOR</option>
+            <option value="cert_parametros">CERTIFICADO DE PARÁMETROS URBANÍSTICOS</option>
+            <option value="numeracion_municipal">NUMERACIÓN MUNICIPAL</option>
+            <option value="titulo_propiedad">TÍTULO DE PROPIEDAD</option>
+            <option value="cert_posesion">CERTIFICADO DE POSESIÓN</option>
+            <option value="licencia_funcionamiento">LICENCIA DE FUNCIONAMIENTO</option>
+            <option value="cert_compatibilidad">CERTIFICADO DE COMPATIBILIDAD DE USOS</option>
+            <option value="boleta_remuneracion">BOLETA DE REMUNERACIÓN</option>
+            <option value="papeleta_fiscalizacion">PAPELETA DE FISCALIZACIÓN (POR CODIGO)</option>
+            <option value="codigo_catastral">CÓDIGO CATASTRAL</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="num-doc">Número Documento:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="num-doc"
+            placeholder="🗒 Ingrese el número del documento"
+          />
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="captcha-input">Captcha:</label>
+          <div class="captcha-row">
+            <input
+              class="form-control"
+              type="text"
+              id="captcha-input"
+              placeholder="Ingrese el captcha"
+              style="max-width: 160px;"
+            />
+            <div class="captcha-box">
+              <span id="captcha-text">6FSaiS</span>
+              <button class="refresh-btn" onclick="refreshCaptcha()" title="Refrescar captcha">&#x21BB;</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="msg-encontrado" class="msg-encontrado" style="display:none;">Documento Encontrado!</div>
+        <button class="btn-validar" onclick="validarDocumento()">Validar Documento</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="resultado-section">
+    <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL CARNET DE SALUD</div>
+    <div class="resultado-tabla-wrapper">
+      <table class="resultado-tabla" id="resultado-tabla">
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <span>Desarrollado por <a class="footer-link" href="https://www.munichiclayo.gob.pe" target="_blank">MPCH Chiclayo</a></span>
+    <span><strong>Versión</strong> 1.0.0</span>
+  </footer>
+
+  <script>
+    function randomCaptcha() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+      let s = '';
+      for (let i = 0; i < 6; i++) {
+        s += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return s;
+    }
+
+    function refreshCaptcha() {
+      document.getElementById('captcha-text').textContent = randomCaptcha();
+      document.getElementById('captcha-input').value = '';
+    }
+
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dJgxa-919ArGsrmviwmO0zBZboZgPhlp2nBcmat1T-Q/gviz/tq?tqx=out:csv';
+
+    function mostrarResultado(headers, registro, tituloHoja) {
+      document.getElementById('msg-encontrado').style.display = 'block';
+      document.getElementById('resultado-titulo').textContent = tituloHoja.toUpperCase();
+
+      const tbody = document.querySelector('#resultado-tabla tbody');
+      tbody.innerHTML = '';
+
+      // Mostrar campos en pares por fila (label + valor)
+      const campos = headers.map((h, i) => [h, registro[i] || '']);
+      for (let i = 0; i < campos.length; i += 2) {
+        const tr = document.createElement('tr');
+        const [label1, val1] = campos[i];
+        const [label2, val2] = campos[i + 1] || ['', ''];
+
+        const tdL1 = document.createElement('td'); tdL1.className = 'field-label'; tdL1.textContent = label1;
+        const tdV1 = document.createElement('td'); tdV1.className = 'field-value'; tdV1.textContent = val1;
+        const tdL2 = document.createElement('td'); tdL2.className = 'field-label'; tdL2.textContent = label2;
+        const tdV2 = document.createElement('td'); tdV2.className = 'field-value'; tdV2.textContent = val2;
+
+        tr.append(tdL1, tdV1, tdL2, tdV2);
+        tbody.appendChild(tr);
+      }
+
+      const seccion = document.getElementById('resultado-section');
+      seccion.style.display = 'block';
+      seccion.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function validarDocumento() {
+      const tipoSelect = document.getElementById('tipo-doc');
+      const tipo       = tipoSelect.value;
+      const tipoTexto  = tipoSelect.options[tipoSelect.selectedIndex].text;
+      const num        = document.getElementById('num-doc').value.trim();
+      const captchaInput = document.getElementById('captcha-input').value.trim();
+      const captchaReal  = document.getElementById('captcha-text').textContent;
+
+      if (!tipo || !num || !captchaInput) {
+        alert('Por favor complete todos los campos.');
+        return;
+      }
+      if (captchaInput !== captchaReal) {
+        alert('Captcha incorrecto. Intente nuevamente.');
+        refreshCaptcha();
+        return;
+      }
+
+      const btnValidar = document.querySelector('.btn-validar');
+      btnValidar.textContent = 'Buscando...';
+      btnValidar.disabled = true;
+      document.getElementById('resultado-section').style.display = 'none';
+      document.getElementById('msg-encontrado').style.display = 'none';
+
+      try {
+        const resp = await fetch(SHEET_URL);
+        if (!resp.ok) throw new Error('No se pudo acceder a la hoja.');
+        const text = await resp.text();
+        const rows = text.split('\n').map(line =>
+          line.split(',').map(x => x.replace(/"/g, '').trim())
+        ).filter(r => r.some(c => c !== ''));
+
+        if (rows.length < 3) throw new Error('La hoja no tiene datos suficientes.');
+
+        // Fila 1 = título (celda A1), Fila 2 = encabezados, Fila 3+ = datos
+        const tituloHoja = rows[0][0] || tipoTexto;
+        const headers    = rows[1];
+        const datos      = rows.slice(2);
+
+        // Índices de las columnas clave
+        const idxTipo = headers.findIndex(h => h.trim().toUpperCase().includes('TIPO'));
+        const idxNum  = headers.findIndex(h => h.trim().toUpperCase().includes('NUMERO') || h.trim().toUpperCase().includes('NÚMERO'));
+
+        // Buscar fila donde TIPO DE DOCUMENTO y NUMERO DE DOCUMENTO coincidan
+        const registro = datos.find(row => {
+          const tipoFila = (row[idxTipo] || '').trim().toUpperCase();
+          const numFila  = (row[idxNum]  || '').trim().toLowerCase();
+          const tipoUser = tipoTexto.trim().toUpperCase();
+          const numUser  = num.trim().toLowerCase();
+          return tipoFila === tipoUser && numFila.includes(numUser);
+        });
+
+        if (!registro) {
+          alert('No se encontró ningún documento con ese número.');
+          refreshCaptcha();
+          return;
+        }
+
+        mostrarResultado(headers, registro, 'DETALLES DE ' + tipoTexto);
+
+      } catch (err) {
+        alert('Error al consultar la hoja: ' + err.message + '\nVerifica que la hoja esté publicada en la web como CSV.');
+      } finally {
+        btnValidar.textContent = 'Validar Documento';
+        btnValidar.disabled = false;
+        refreshCaptcha();
+      }
+    }
+  </script>
+
+</body>
+</html>

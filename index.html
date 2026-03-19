@@ -385,14 +385,20 @@
           line.split(',').map(x => x.replace(/"/g, '').trim())
         ).filter(r => r.some(c => c !== ''));
 
-        if (rows.length < 3) throw new Error('La hoja no tiene datos suficientes.');
+        if (rows.length < 2) throw new Error('La hoja no tiene datos suficientes.');
 
-        // Fila 1 = título (celda A1), Fila 2 = encabezados, Fila 3+ = datos
-        const tituloHoja = rows[0][0] || tipoTexto;
-        const headers    = rows[1];
-        const datos      = rows.slice(2);
+        // Detectar fila de encabezados automaticamente
+        let headerIdx = rows.findIndex(row =>
+          row.some(c => c.toUpperCase().includes('TIPO') || c.toUpperCase().includes('ESTADO') || c.toUpperCase().includes('NUMERO'))
+        );
+        if (headerIdx === -1) headerIdx = 0;
 
-        // Índices de las columnas clave
+        const headers = rows[headerIdx];
+        const datos   = rows.slice(headerIdx + 1).filter(r => r.some(c => c !== ''));
+
+        if (datos.length === 0) throw new Error('La hoja no tiene filas de datos.');
+
+        // Indices de columnas clave
         const idxTipo = headers.findIndex(h => h.trim().toUpperCase().includes('TIPO'));
         const idxNum  = headers.findIndex(h => h.trim().toUpperCase().includes('NUMERO') || h.trim().toUpperCase().includes('NÚMERO'));
 
@@ -421,6 +427,10 @@
         refreshCaptcha();
       }
     }
+  </script>
+
+</body>
+</html>
   </script>
 
 </body>

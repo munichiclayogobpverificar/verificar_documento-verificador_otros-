@@ -166,23 +166,23 @@
     }
     #resultado-section {
       display: none;
-      background: #fff;
-      padding: 2rem 3rem;
+      background: #f0f0f0;
+      padding: 2rem 2.5rem;
     }
     .resultado-titulo {
       background: #cc0000;
       color: #fff;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-align: center;
-      padding: 0.85rem 1rem;
-      letter-spacing: 1px;
-      border-radius: 4px 4px 0 0;
+      padding: 0.7rem 1rem;
+      letter-spacing: 0.5px;
+      border-radius: 0;
+      margin-bottom: 1rem;
     }
     .resultado-tabla-wrapper {
-      border: 1px solid #ddd;
-      border-top: none;
-      border-radius: 0 0 4px 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       overflow: hidden;
       background: #fff;
     }
@@ -191,30 +191,34 @@
       border-collapse: collapse;
     }
     .resultado-tabla tr {
-      border-bottom: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e0e0e0;
     }
     .resultado-tabla tr:last-child {
       border-bottom: none;
     }
     .resultado-tabla td {
-      padding: 0.8rem 1.1rem;
-      font-size: 0.88rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
       color: #333;
+      background: #fff;
     }
     .resultado-tabla td.field-label {
       font-weight: bold;
       color: #111;
-      width: 20%;
+      width: 18%;
       white-space: nowrap;
-      border-right: 1px solid #e8e8e8;
+      border-right: 1px solid #e0e0e0;
     }
     .resultado-tabla td.field-value {
       color: #444;
-      width: 30%;
-      border-right: 1px solid #e8e8e8;
+      width: 32%;
+      border-right: 1px solid #e0e0e0;
     }
-    .resultado-tabla td.field-label:last-of-type {
-      border-left: 1px solid #e8e8e8;
+    .resultado-tabla td.field-label:nth-child(3) {
+      border-left: none;
+    }
+    .resultado-tabla tr td:last-child {
+      border-right: none;
     }
   </style>
 </head>

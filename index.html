@@ -203,44 +203,74 @@
     /* ── RESULTADO ── */
     #resultado-section {
       display: none;
-      background: #fff;
+      background: #f3f4f6;
       padding: 2rem 1.5rem;
       border-top: 3px solid #2563eb;
     }
-    .resultado-card { max-width: 960px; margin: 0 auto; }
+
+    .resultado-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
     .resultado-titulo {
       background: #dc2626;
       color: #fff;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       text-align: center;
-      padding: 0.8rem 1rem;
+      padding: 0.9rem 1rem;
       letter-spacing: 1px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
       text-transform: uppercase;
+      margin: 0;
     }
-    .resultado-tabla-wrapper {
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      overflow: hidden;
+
+    /* Grid de campos: 2 columnas en desktop, 1 en móvil */
+    .resultado-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: none;
     }
-    .resultado-tabla { width: 100%; border-collapse: collapse; }
-    .resultado-tabla tr { border-bottom: 1px solid #f3f4f6; }
-    .resultado-tabla tr:last-child { border-bottom: none; }
-    .resultado-tabla td {
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-      color: #374151;
+
+    .resultado-campo {
+      padding: 0.75rem 1.1rem;
+      border-bottom: 1px solid #f3f4f6;
+      border-right: 1px solid #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
     }
-    .resultado-tabla td:nth-child(odd) {
+
+    .resultado-campo:nth-child(even) { border-right: none; }
+
+    /* Campo que ocupa toda la fila (dirección, ciudadano) */
+    .resultado-campo.full {
+      grid-column: 1 / -1;
+      border-right: none;
+    }
+
+    .campo-label {
+      font-size: 0.72rem;
       font-weight: 700;
-      color: #111827;
-      width: 22%;
-      white-space: nowrap;
-      background: #fafafa;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .resultado-tabla td:nth-child(even) { color: #4b5563; }
+
+    .campo-valor {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #111827;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    .campo-valor.estado-vencido { color: #dc2626; }
+    .campo-valor.estado-vigente { color: #16a34a; }
 
     /* ── FOOTER ── */
     .page-footer {
@@ -272,10 +302,15 @@
         letter-spacing: 6px;
       }
 
-      #resultado-section { padding: 1.25rem 0.875rem; }
-      .resultado-titulo { font-size: 0.8rem; }
-      .resultado-tabla td { padding: 0.6rem 0.75rem; font-size: 0.8rem; }
-      .resultado-tabla td:nth-child(odd) { width: 40%; white-space: normal; }
+      /* Resultado móvil: 1 columna */
+      #resultado-section { padding: 1rem 0.75rem; }
+      .resultado-card { border-radius: 10px; }
+      .resultado-titulo { font-size: 0.8rem; padding: 0.75rem; }
+
+      .resultado-grid { grid-template-columns: 1fr; }
+      .resultado-campo { border-right: none !important; grid-column: auto !important; }
+      .campo-label { font-size: 0.7rem; }
+      .campo-valor { font-size: 0.9rem; }
 
       .page-footer {
         flex-direction: column;
@@ -367,11 +402,7 @@
   <section id="resultado-section">
     <div class="resultado-card">
       <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL DOCUMENTO</div>
-      <div class="resultado-tabla-wrapper">
-        <table class="resultado-tabla" id="resultado-tabla">
-          <tbody></tbody>
-        </table>
-      </div>
+      <div class="resultado-grid" id="resultado-grid"></div>
     </div>
   </section>
 
@@ -379,7 +410,7 @@
   <footer class="page-footer">
     <span>Desarrollado por <a class="footer-link"
       href="https://www.munichiclayo.gob.pe" target="_blank">MPCH Chiclayo</a></span>
-    <span><strong>Versión</strong> 1.0.0</span>
+    <span><a class="footer-link" href="https://www.munichiclayo.gob.pe" target="_blank">munichiclayo.gob.pe</a></span>
   </footer>
 
   <script>
@@ -407,20 +438,33 @@
         .map((h, i) => [h.trim(), (registro[i] || '').trim()])
         .filter(([h]) => !excluir.includes(h.toUpperCase()));
 
-      const tbody = document.querySelector('#resultado-tabla tbody');
-      tbody.innerHTML = '';
+      // Campos que deben ocupar fila completa (textos largos)
+      const camposFullRow = ['DIRECCION','DIRECCIÓN','CIUDADANO','EMPRESA','NOMBRE'];
 
-      for (let i = 0; i < campos.length; i += 2) {
-        const tr = document.createElement('tr');
-        const [l1, v1] = campos[i];
-        const [l2, v2] = campos[i+1] || ['',''];
-        [l1, v1, l2, v2].forEach(txt => {
-          const td = document.createElement('td');
-          td.textContent = txt;
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      }
+      const grid = document.getElementById('resultado-grid');
+      grid.innerHTML = '';
+
+      campos.forEach(([label, valor]) => {
+        const esFull = camposFullRow.some(k => label.toUpperCase().includes(k));
+        const div = document.createElement('div');
+        div.className = 'resultado-campo' + (esFull ? ' full' : '');
+
+        const lSpan = document.createElement('span');
+        lSpan.className = 'campo-label';
+        lSpan.textContent = label;
+
+        const vSpan = document.createElement('span');
+        let estadoClass = '';
+        if (label.toUpperCase().includes('ESTADO')) {
+          estadoClass = valor.toUpperCase() === 'VENCIDO' ? ' estado-vencido' : ' estado-vigente';
+        }
+        vSpan.className = 'campo-valor' + estadoClass;
+        vSpan.textContent = valor || '—';
+
+        div.appendChild(lSpan);
+        div.appendChild(vSpan);
+        grid.appendChild(div);
+      });
 
       const sec = document.getElementById('resultado-section');
       sec.style.display = 'block';

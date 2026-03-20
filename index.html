@@ -6,7 +6,7 @@
   <title>Verifica tu Documento | MPCH</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #eee; }
+    body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
     /* NAVBAR */
     .navbar {
@@ -15,15 +15,16 @@
       justify-content: space-between;
       background: #fff;
       padding: 0.6rem 1.5rem;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 2px solid #e0e0e0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
     .navbar-left { display: flex; align-items: center; gap: 0.75rem; }
-    .navbar-back { color: #1a7fd4; font-size: 1.4rem; text-decoration: none; font-weight: bold; }
+    .navbar-back { color: #1565c0; font-size: 1.4rem; text-decoration: none; font-weight: bold; }
     .navbar-logo { height: 48px; }
     .navbar-brand { font-size: 0.85rem; color: #333; line-height: 1.3; }
     .navbar-brand strong { display: block; }
-    .navbar-title { font-size: 1.1rem; color: #333; }
-    .navbar-title span { color: #1a7fd4; font-weight: bold; }
+    .navbar-title { font-size: 1.1rem; color: #222; font-weight: 500; letter-spacing: 0.3px; }
+    .navbar-title span { color: #0d47a1; font-weight: bold; font-size: 1.2rem; }
 
     /* HERO */
     .hero {
@@ -52,13 +53,14 @@
       overflow: hidden;
       width: 100%;
       max-width: 620px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .form-header {
-      background: #1a7fd4;
+      background: #1565c0;
       color: #fff;
       padding: 0.75rem 1.25rem;
       font-size: 0.95rem;
+      font-weight: 500;
     }
     .form-body {
       padding: 1.5rem 1.75rem;
@@ -68,7 +70,7 @@
     }
     .form-row { display: flex; align-items: center; gap: 1rem; }
     .form-label {
-      color: #1a7fd4;
+      color: #1565c0;
       font-weight: bold;
       font-size: 0.92rem;
       min-width: 148px;
@@ -77,28 +79,28 @@
     .form-control {
       flex: 1;
       padding: 0.5rem 0.75rem;
-      border: 1px solid #ccc;
+      border: 1px solid #bbb;
       border-radius: 4px;
       font-size: 0.92rem;
-      color: #555;
+      color: #333;
       background: #fff;
       outline: none;
       transition: border 0.2s;
     }
-    .form-control:focus { border-color: #1a7fd4; }
+    .form-control:focus { border-color: #1565c0; box-shadow: 0 0 0 2px rgba(21,101,192,0.15); }
 
     /* CAPTCHA */
     .captcha-row { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
     .captcha-box {
       background: #f5f5f5;
-      border: 1.5px solid #bbb;
+      border: 2px solid #1565c0;
       border-radius: 4px;
       padding: 0.4rem 0.9rem;
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 3px;
       font-family: monospace;
-      color: #222;
+      color: #111;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -108,31 +110,33 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: #1a7fd4;
+      color: #1565c0;
       font-size: 1.1rem;
       padding: 0;
       line-height: 1;
     }
-    .refresh-btn:hover { color: #0d5fa0; }
+    .refresh-btn:hover { color: #0d47a1; }
 
     /* BUTTON */
     .btn-validar {
       margin: 0.25rem auto 0;
       display: block;
-      background: #1a7fd4;
+      background: #1565c0;
       color: #fff;
       border: none;
       border-radius: 4px;
-      padding: 0.6rem 2.2rem;
+      padding: 0.65rem 2.5rem;
       font-size: 0.97rem;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
+      letter-spacing: 0.3px;
     }
-    .btn-validar:hover { background: #1565b0; }
+    .btn-validar:hover { background: #0d47a1; }
 
     /* MSG ENCONTRADO */
     .msg-encontrado {
-      color: #28a745;
+      color: #2e7d32;
       font-weight: bold;
       text-align: center;
       font-size: 0.97rem;
@@ -143,8 +147,7 @@
       display: none;
       background: #ffffff;
       padding: 2.5rem 2.5rem;
-      border-top: 4px solid #1a7fd4;
-      border-bottom: 4px solid #1a7fd4;
+      border-top: 4px solid #1565c0;
     }
 
     .resultado-card {
@@ -153,7 +156,7 @@
     }
 
     .resultado-titulo {
-      background: #e00000;
+      background: #cc0000;
       color: #fff;
       font-weight: bold;
       font-size: 0.92rem;
@@ -217,7 +220,7 @@
       font-size: 0.8rem;
       color: #555;
     }
-    .footer-link { color: #1a7fd4; text-decoration: none; }
+    .footer-link { color: #1565c0; text-decoration: none; }
     .footer-link:hover { text-decoration: underline; }
   </style>
 </head>

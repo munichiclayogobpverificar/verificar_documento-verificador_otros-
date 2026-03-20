@@ -4,353 +4,284 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verifica tu Documento | MPCH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f0f0f0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* NAVBAR */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAVBAR ── */
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: #fff;
       padding: 0.6rem 1.5rem;
-      border-bottom: 2px solid #e0e0e0;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
-    .navbar-left { display: flex; align-items: center; gap: 0.75rem; }
-    .navbar-back { color: #0066ff; font-size: 1.4rem; text-decoration: none; font-weight: bold; }
-    .navbar-logo { height: 48px; }
-    .navbar-brand { font-size: 0.85rem; color: #333; line-height: 1.3; }
-    .navbar-brand strong { display: block; }
-    .navbar-title { font-size: 1.1rem; color: #222; font-weight: 500; letter-spacing: 0.3px; }
-    .navbar-title span { color: #0044cc; font-weight: bold; font-size: 1.2rem; }
+    .navbar-left { display: flex; align-items: center; gap: 0.65rem; }
+    .navbar-back {
+      color: #2563eb;
+      font-size: 1.3rem;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .navbar-logo { height: 44px; object-fit: contain; }
+    .navbar-brand { font-size: 0.78rem; color: #374151; line-height: 1.35; }
+    .navbar-brand strong { display: block; font-weight: 600; }
 
-    /* HERO */
+    .navbar-title {
+      font-size: 1rem;
+      color: #1f2937;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    .navbar-title span {
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    /* Ocultar título SGD en móvil */
+    @media (max-width: 768px) {
+      .navbar-title { display: none; }
+      .navbar-logo { height: 36px; }
+      .navbar-brand { font-size: 0.72rem; }
+    }
+
+    /* ── HERO ── */
     .hero {
-      min-height: 500px;
-      background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
+      flex: 1;
+      background:
+        linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
         url('https://raw.githubusercontent.com/munichiclayogobpverificar/verificar_documento-verificador_otros-/main/MPCH1039%20(1).jpg')
-        center top/cover no-repeat;
+        center top / cover no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
     }
     .hero-title {
       color: #fff;
-      font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: 1.25rem;
+      font-size: 2.25rem;
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
       text-align: center;
+      line-height: 1.2;
     }
 
-    /* FORM CARD */
+    /* ── CARD ── */
     .form-card {
       background: #fff;
-      border-radius: 6px;
-      overflow: hidden;
+      border-radius: 12px;
       width: 100%;
-      max-width: 620px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      max-width: 520px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      overflow: hidden;
     }
     .form-header {
-      background: #0057e7;
+      background: #2563eb;
       color: #fff;
-      padding: 0.75rem 1.25rem;
-      font-size: 0.95rem;
+      padding: 0.85rem 1.25rem;
+      font-size: 0.88rem;
       font-weight: 500;
+      line-height: 1.4;
     }
     .form-body {
-      padding: 1.5rem 1.75rem;
+      padding: 1.5rem 1.5rem 1.25rem;
       display: flex;
       flex-direction: column;
       gap: 1.1rem;
     }
-    .form-row { display: flex; align-items: center; gap: 1rem; }
-    .form-label {
-      color: #0057e7;
-      font-weight: bold;
-      font-size: 0.92rem;
-      min-width: 148px;
-      text-align: right;
+
+    /* ── CAMPO ── */
+    .field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .field-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #2563eb;
+      letter-spacing: 0.01em;
     }
-    .form-control {
-      flex: 1;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #bbb;
-      border-radius: 4px;
-      font-size: 0.92rem;
-      color: #333;
+    .field-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 0.875rem;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #111827;
       background: #fff;
       outline: none;
-      transition: border 0.2s;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
     }
-    .form-control:focus { border-color: #0057e7; box-shadow: 0 0 0 2px rgba(0,87,231,0.2); }
+    .field-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    select.field-input { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.875rem center; padding-right: 2.5rem; }
 
-    /* CAPTCHA */
-    .captcha-row { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
-    .captcha-box {
-      background: #f5f5f5;
-      border: 2px solid #0057e7;
-      border-radius: 4px;
-      padding: 0.4rem 0.9rem;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      font-family: monospace;
-      color: #111;
+    /* ── CAPTCHA ── */
+    .captcha-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .captcha-row { display: flex; gap: 0.75rem; align-items: center; }
+    .captcha-input { flex: 1; }
+    .captcha-display {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0.5rem;
+      background: #f8fafc;
+      border: 2px solid #2563eb;
+      border-radius: 8px;
+      padding: 0 0.875rem;
+      height: 48px;
+      min-width: 130px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #1e3a8a;
+      user-select: none;
       white-space: nowrap;
     }
-    .refresh-btn {
+    .captcha-refresh {
       background: none;
       border: none;
       cursor: pointer;
-      color: #0057e7;
-      font-size: 1.1rem;
+      color: #2563eb;
+      font-size: 1rem;
       padding: 0;
       line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s;
     }
-    .refresh-btn:hover { color: #0044cc; }
+    .captcha-refresh:hover { transform: rotate(180deg); }
 
-    /* BUTTON */
+    /* ── MSG ENCONTRADO ── */
+    .msg-encontrado {
+      display: none;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      color: #16a34a;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .msg-encontrado.visible { display: block; }
+
+    /* ── BOTÓN ── */
     .btn-validar {
-      margin: 0.25rem auto 0;
-      display: block;
-      background: #0057e7;
+      width: 100%;
+      height: 48px;
+      background: #2563eb;
       color: #fff;
       border: none;
-      border-radius: 4px;
-      padding: 0.65rem 2.5rem;
-      font-size: 0.97rem;
-      font-weight: bold;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
       cursor: pointer;
-      transition: background 0.2s;
-      letter-spacing: 0.3px;
+      transition: background 0.15s, transform 0.1s;
+      letter-spacing: 0.02em;
     }
-    .btn-validar:hover { background: #0044cc; }
+    .btn-validar:hover { background: #1d4ed8; }
+    .btn-validar:active { transform: scale(0.98); }
+    .btn-validar:disabled { background: #93c5fd; cursor: not-allowed; }
 
-    /* MSG ENCONTRADO */
-    .msg-encontrado {
-      color: #00a82d;
-      font-weight: bold;
-      text-align: center;
-      font-size: 0.97rem;
-    }
-
-    /* ===== RESULTADO ===== */
+    /* ── RESULTADO ── */
     #resultado-section {
       display: none;
-      background: #ffffff;
-      padding: 2.5rem 2.5rem;
-      border-top: 4px solid #0057e7;
-    }
-
-    .resultado-card {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .resultado-titulo {
-      background: #ff0000;
-      color: #fff;
-      font-weight: bold;
-      font-size: 0.92rem;
-      text-align: center;
-      padding: 0.85rem 1rem;
-      letter-spacing: 0.8px;
-      border-radius: 6px;
-      margin-bottom: 1.2rem;
-      border: none;
-    }
-
-    .resultado-tabla-wrapper {
       background: #fff;
-      border: 1px solid #d0d0d0;
-      border-radius: 6px;
+      padding: 2rem 1.5rem;
+      border-top: 3px solid #2563eb;
+    }
+    .resultado-card { max-width: 960px; margin: 0 auto; }
+    .resultado-titulo {
+      background: #dc2626;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      letter-spacing: 1px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .resultado-tabla-wrapper {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
       overflow: hidden;
     }
-
-    .resultado-tabla {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .resultado-tabla tr {
-      border-bottom: 1px solid #e2e2e2;
-    }
-
-    .resultado-tabla tr:last-child {
-      border-bottom: none;
-    }
-
+    .resultado-tabla { width: 100%; border-collapse: collapse; }
+    .resultado-tabla tr { border-bottom: 1px solid #f3f4f6; }
+    .resultado-tabla tr:last-child { border-bottom: none; }
     .resultado-tabla td {
-      padding: 0.82rem 1rem;
-      font-size: 0.86rem;
-      background: #fff;
-      color: #444;
-      border: none;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: #374151;
     }
-
-    .resultado-tabla td:nth-child(1),
-    .resultado-tabla td:nth-child(3) {
-      font-weight: bold;
-      color: #111;
-      width: 15%;
+    .resultado-tabla td:nth-child(odd) {
+      font-weight: 700;
+      color: #111827;
+      width: 22%;
       white-space: nowrap;
+      background: #fafafa;
     }
+    .resultado-tabla td:nth-child(even) { color: #4b5563; }
 
-    .resultado-tabla td:nth-child(2),
-    .resultado-tabla td:nth-child(4) {
-      width: 35%;
-      color: #444;
-    }
-
-    /* FOOTER */
+    /* ── FOOTER ── */
     .page-footer {
-      background: #f5f5f5;
-      border-top: 1px solid #e0e0e0;
-      padding: 0.65rem 1.25rem;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: #555;
+      align-items: center;
+      font-size: 0.78rem;
+      color: #6b7280;
     }
-    .footer-link { color: #0057e7; text-decoration: none; }
-    .footer-link:hover { text-decoration: underline; }
+    .footer-link { color: #2563eb; text-decoration: none; font-weight: 500; }
 
-    /* ===== RESPONSIVE MÓVIL ===== */
+    /* ── RESPONSIVE MÓVIL ── */
     @media (max-width: 600px) {
+      .hero { padding: 1.75rem 0.875rem; }
+      .hero-title { font-size: 1.9rem; margin-bottom: 1.25rem; }
 
-      /* NAVBAR */
-      .navbar { padding: 0.4rem 0.75rem; }
-      .navbar-logo { height: 36px; }
-      .navbar-title {
-        font-size: 0;
-        display: flex;
-        align-items: center;
-        gap: 2px;
-      }
-      .navbar-title::before {
-        content: '|';
-        font-size: 1.3rem;
-        color: #ccc;
-        margin-right: 4px;
-      }
-      .navbar-title span {
-        font-size: 1.4rem;
-        color: #0044cc;
-        font-weight: bold;
-      }
+      .form-card { border-radius: 10px; max-width: 100%; }
+      .form-body { padding: 1.25rem 1rem 1rem; gap: 1rem; }
+      .form-header { font-size: 0.84rem; padding: 0.75rem 1rem; }
 
-      /* HERO */
-      .hero { padding: 1.5rem 0.75rem; min-height: auto; }
-      .hero-title {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin-bottom: 1rem;
-        text-align: center;
-        font-weight: 300;
-      }
-
-      /* FORM CARD */
-      .form-card { max-width: 100%; border-radius: 0; box-shadow: none; }
-      .form-header { font-size: 0.88rem; padding: 0.75rem 1rem; line-height: 1.4; }
-      .form-body { padding: 1rem 1rem; gap: 0.9rem; }
-
-      .form-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.2rem;
-        width: 100%;
-      }
-      .form-label {
-        min-width: unset;
-        text-align: left;
-        font-size: 0.95rem;
-        color: #0057e7;
-      }
-      .form-control {
-        width: 100%;
-        font-size: 0.95rem;
-        padding: 0.6rem 0.75rem;
-        border-radius: 6px;
-      }
-
-      /* CAPTCHA */
-      .captcha-row {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        gap: 0.4rem;
-      }
-      .captcha-row .form-control { max-width: 100% !important; }
-      .captcha-box {
+      .captcha-row { flex-direction: column; }
+      .captcha-display {
         width: 100%;
         justify-content: center;
-        font-size: 1.5rem;
-        letter-spacing: 8px;
-        padding: 0.7rem 1rem;
-        border-radius: 6px;
-        border: 2px solid #0057e7;
-        gap: 12px;
-      }
-      .refresh-btn { font-size: 1.2rem; }
-
-      /* BUTTON */
-      .btn-validar {
-        width: 100%;
-        padding: 0.85rem;
-        font-size: 1rem;
-        border-radius: 6px;
-        margin-top: 0.1rem;
-      }
-      .msg-encontrado { font-size: 1rem; text-align: center; }
-
-      /* RESULTADO */
-      #resultado-section { padding: 1rem 0.75rem; border-top: 3px solid #0057e7; }
-      .resultado-card { max-width: 100%; }
-      .resultado-titulo {
-        font-size: 0.82rem;
-        padding: 0.75rem;
-        border-radius: 5px;
-        margin-bottom: 0.75rem;
-      }
-      .resultado-tabla-wrapper { border-radius: 6px; }
-
-      /* En móvil: tabla de 2 columnas (label | valor) en cada fila */
-      .resultado-tabla tr {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        border-bottom: 1px solid #e0e0e0;
-      }
-      .resultado-tabla td {
-        padding: 0.6rem 0.75rem;
-        font-size: 0.82rem;
-        width: auto !important;
-      }
-      .resultado-tabla td:nth-child(1),
-      .resultado-tabla td:nth-child(3) {
-        font-weight: bold;
-        color: #111;
-        border-right: 1px solid #e0e0e0;
-      }
-      .resultado-tabla td:nth-child(3),
-      .resultado-tabla td:nth-child(4) {
-        border-top: 1px solid #e0e0e0;
+        font-size: 1.35rem;
+        letter-spacing: 6px;
       }
 
-      /* FOOTER */
+      #resultado-section { padding: 1.25rem 0.875rem; }
+      .resultado-titulo { font-size: 0.8rem; }
+      .resultado-tabla td { padding: 0.6rem 0.75rem; font-size: 0.8rem; }
+      .resultado-tabla td:nth-child(odd) { width: 40%; white-space: normal; }
+
       .page-footer {
         flex-direction: column;
-        gap: 0.1rem;
+        gap: 0.2rem;
         text-align: center;
         padding: 0.6rem 1rem;
-        font-size: 0.78rem;
       }
     }
   </style>
@@ -361,7 +292,14 @@
   <nav class="navbar">
     <div class="navbar-left">
       <a class="navbar-back" href="#">&#8592;</a>
-      <img class="navbar-logo" src="https://drive.google.com/thumbnail?id=1yL6aH_t2I46RnFpnqRLU8YVjouBE1cA9&sz=w200" alt="Logo MPCH" onerror="this.style.display='none'" />
+      <img class="navbar-logo"
+        src="https://drive.google.com/thumbnail?id=1yL6aH_t2I46RnFpnqRLU8YVjouBE1cA9&sz=w200"
+        alt="Logo MPCH"
+        onerror="this.style.display='none'" />
+      <div class="navbar-brand">
+        <strong>Municipalidad</strong>
+        Provincial de Chiclayo
+      </div>
     </div>
     <div class="navbar-title">
       Sistema de Gestión Documental <span>SGD</span>
@@ -371,22 +309,23 @@
   <!-- HERO + FORM -->
   <section class="hero">
     <h1 class="hero-title">Verifica tu Documento | MPCH</h1>
+
     <div class="form-card">
       <div class="form-header">
         Ingrese el tipo de documento y su número para visualizar el PDF asociado
       </div>
       <div class="form-body">
 
-        <div class="form-row">
-          <label class="form-label" for="tipo-doc">Tipo de documento:</label>
-          <select class="form-control" id="tipo-doc">
+        <div class="field">
+          <label class="field-label" for="tipo-doc">Tipo de documento:</label>
+          <select class="field-input" id="tipo-doc">
             <option value="">Seleccione un validador</option>
-            <option value="licencia_funcionamiento_res">RESOLUCION DE LICENCIA DE FUNCIONAMIENTO</option>
+            <option value="licencia_fun_res">RESOLUCION DE LICENCIA DE FUNCIONAMIENTO</option>
             <option value="cert_salubridad">CERTIFICADO DE SALUBRIDAD</option>
             <option value="carnet_salud">CARNET DE SALUD</option>
             <option value="papeleta_infraccion">DOCUMENTOS POR PAPELETA DE INFRACCIÓN (PIT)</option>
             <option value="oficio_policial">DOCUMENTOS POR OFICIO POLICIAL – POR PLACA</option>
-            <option value="cert_conformidad_obra">CERTIFICADO DE CONFORMIDAD DE OBRA</option>
+            <option value="cert_conformidad">CERTIFICADO DE CONFORMIDAD DE OBRA</option>
             <option value="licencia_edificacion">LICENCIA DE EDIFICACIÓN</option>
             <option value="tuc_transportes">TUC-TRANSPORTES</option>
             <option value="acta_fiscalizacion">ACTA DE FISCALIZACIÓN DE TRANSPORTE (POR PLACA)</option>
@@ -403,23 +342,25 @@
           </select>
         </div>
 
-        <div class="form-row">
-          <label class="form-label" for="num-doc">Número Documento:</label>
-          <input class="form-control" type="text" id="num-doc" placeholder="🗒 Ingrese el número del documento" />
+        <div class="field">
+          <label class="field-label" for="num-doc">Número Documento:</label>
+          <input class="field-input" type="text" id="num-doc"
+            placeholder="Ingrese el número del documento" />
         </div>
 
-        <div class="form-row">
-          <label class="form-label" for="captcha-input">Captcha:</label>
+        <div class="captcha-group">
+          <label class="field-label" for="captcha-input">Captcha:</label>
           <div class="captcha-row">
-            <input class="form-control" type="text" id="captcha-input" placeholder="Ingrese el captcha" style="max-width:160px;" />
-            <div class="captcha-box">
+            <input class="field-input captcha-input" type="text" id="captcha-input"
+              placeholder="Ingrese el captcha" />
+            <div class="captcha-display">
               <span id="captcha-text">6FSaiS</span>
-              <button class="refresh-btn" onclick="refreshCaptcha()" title="Refrescar">&#x21BB;</button>
+              <button class="captcha-refresh" onclick="refreshCaptcha()" title="Nuevo captcha">&#x21BB;</button>
             </div>
           </div>
         </div>
 
-        <div id="msg-encontrado" class="msg-encontrado" style="display:none;">Documento Encontrado!</div>
+        <div class="msg-encontrado" id="msg-encontrado">✓ Documento Encontrado!</div>
         <button class="btn-validar" onclick="validarDocumento()">Validar Documento</button>
 
       </div>
@@ -429,7 +370,7 @@
   <!-- RESULTADO -->
   <section id="resultado-section">
     <div class="resultado-card">
-      <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL CARNET DE SALUD</div>
+      <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL DOCUMENTO</div>
       <div class="resultado-tabla-wrapper">
         <table class="resultado-tabla" id="resultado-tabla">
           <tbody></tbody>
@@ -440,44 +381,46 @@
 
   <!-- FOOTER -->
   <footer class="page-footer">
-    <span>Desarrollado por <a class="footer-link" href="https://www.munichiclayo.gob.pe" target="_blank">MPCH Chiclayo</a></span>
+    <span>Desarrollado por <a class="footer-link"
+      href="https://www.munichiclayo.gob.pe" target="_blank">MPCH Chiclayo</a></span>
     <span><strong>Versión</strong> 1.0.0</span>
   </footer>
 
   <script>
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dJgxa-919ArGsrmviwmO0zBZboZgPhlp2nBcmat1T-Q/gviz/tq?tqx=out:csv';
+
     function randomCaptcha() {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
-      let s = '';
-      for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
-      return s;
+      const c = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+      return Array.from({length: 6}, () => c[Math.floor(Math.random() * c.length)]).join('');
     }
 
     function refreshCaptcha() {
       document.getElementById('captcha-text').textContent = randomCaptcha();
       document.getElementById('captcha-input').value = '';
+      document.getElementById('captcha-input').focus();
     }
 
-    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dJgxa-919ArGsrmviwmO0zBZboZgPhlp2nBcmat1T-Q/gviz/tq?tqx=out:csv';
-
     function mostrarResultado(headers, registro, titulo) {
-      document.getElementById('msg-encontrado').style.display = 'block';
+      const msg = document.getElementById('msg-encontrado');
+      msg.classList.add('visible');
+
       document.getElementById('resultado-titulo').textContent = titulo.toUpperCase();
 
-      const tbody = document.querySelector('#resultado-tabla tbody');
-      tbody.innerHTML = '';
-
-      const excluir = ['TIPO DE DOCUMENTO', 'TIPO', 'NUMERO DE DOCUMENTO', 'NUMERO', 'NÚMERO'];
+      const excluir = ['TIPO DE DOCUMENTO','TIPO','NUMERO DE DOCUMENTO','NUMERO','NÚMERO'];
       const campos = headers
         .map((h, i) => [h.trim(), (registro[i] || '').trim()])
         .filter(([h]) => !excluir.includes(h.toUpperCase()));
 
+      const tbody = document.querySelector('#resultado-tabla tbody');
+      tbody.innerHTML = '';
+
       for (let i = 0; i < campos.length; i += 2) {
         const tr = document.createElement('tr');
         const [l1, v1] = campos[i];
-        const [l2, v2] = campos[i + 1] || ['', ''];
-        ['td', 'td', 'td', 'td'].forEach((_, j) => {
+        const [l2, v2] = campos[i+1] || ['',''];
+        [l1, v1, l2, v2].forEach(txt => {
           const td = document.createElement('td');
-          td.textContent = [l1, v1, l2, v2][j];
+          td.textContent = txt;
           tr.appendChild(td);
         });
         tbody.appendChild(tr);
@@ -485,57 +428,70 @@
 
       const sec = document.getElementById('resultado-section');
       sec.style.display = 'block';
-      sec.scrollIntoView({ behavior: 'smooth' });
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function validarDocumento() {
-      const tipoSelect   = document.getElementById('tipo-doc');
-      const tipo         = tipoSelect.value;
-      const tipoTexto    = tipoSelect.options[tipoSelect.selectedIndex].text;
-      const num          = document.getElementById('num-doc').value.trim();
-      const captchaInput = document.getElementById('captcha-input').value.trim();
-      const captchaReal  = document.getElementById('captcha-text').textContent;
+      const tipoSel   = document.getElementById('tipo-doc');
+      const tipo      = tipoSel.value;
+      const tipoTexto = tipoSel.options[tipoSel.selectedIndex].text;
+      const num       = document.getElementById('num-doc').value.trim();
+      const capIn     = document.getElementById('captcha-input').value.trim();
+      const capReal   = document.getElementById('captcha-text').textContent;
 
-      if (!tipo || !num || !captchaInput) { alert('Por favor complete todos los campos.'); return; }
-      if (captchaInput !== captchaReal) { alert('Captcha incorrecto. Intente nuevamente.'); refreshCaptcha(); return; }
+      if (!tipo || !num || !capIn) {
+        alert('Por favor complete todos los campos.');
+        return;
+      }
+      if (capIn !== capReal) {
+        alert('Captcha incorrecto. Intente nuevamente.');
+        refreshCaptcha();
+        return;
+      }
 
       const btn = document.querySelector('.btn-validar');
       btn.textContent = 'Buscando...';
       btn.disabled = true;
       document.getElementById('resultado-section').style.display = 'none';
-      document.getElementById('msg-encontrado').style.display = 'none';
+      document.getElementById('msg-encontrado').classList.remove('visible');
 
       try {
         const resp = await fetch(SHEET_URL);
         if (!resp.ok) throw new Error('No se pudo acceder a la hoja.');
         const text = await resp.text();
         const rows = text.split('\n')
-          .map(line => line.split(',').map(x => x.replace(/"/g, '').trim()))
+          .map(l => l.split(',').map(x => x.replace(/"/g,'').trim()))
           .filter(r => r.some(c => c !== ''));
 
         if (rows.length < 2) throw new Error('La hoja no tiene datos suficientes.');
 
-        let headerIdx = rows.findIndex(row =>
-          row.some(c => c.toUpperCase().includes('TIPO') || c.toUpperCase().includes('ESTADO') || c.toUpperCase().includes('NUMERO'))
+        let hi = rows.findIndex(r =>
+          r.some(c => c.toUpperCase().includes('TIPO') ||
+                      c.toUpperCase().includes('ESTADO') ||
+                      c.toUpperCase().includes('NUMERO'))
         );
-        if (headerIdx === -1) headerIdx = 0;
+        if (hi === -1) hi = 0;
 
-        const headers = rows[headerIdx];
-        const datos   = rows.slice(headerIdx + 1).filter(r => r.some(c => c !== ''));
-        if (datos.length === 0) throw new Error('La hoja no tiene filas de datos.');
+        const headers = rows[hi];
+        const datos   = rows.slice(hi + 1).filter(r => r.some(c => c !== ''));
+        if (!datos.length) throw new Error('La hoja no tiene filas de datos.');
 
-        const idxTipo = headers.findIndex(h => h.trim().toUpperCase().includes('TIPO'));
-        const idxNum  = headers.findIndex(h => h.trim().toUpperCase().includes('NUMERO') || h.trim().toUpperCase().includes('NÚMERO'));
+        const idxT = headers.findIndex(h => h.toUpperCase().includes('TIPO'));
+        const idxN = headers.findIndex(h => h.toUpperCase().includes('NUMERO') || h.toUpperCase().includes('NÚMERO'));
 
-        const registro = datos.find(row => {
-          const tipoFila = (row[idxTipo] || '').trim().toUpperCase();
-          const numFila  = (row[idxNum]  || '').trim().toLowerCase();
-          return tipoFila === tipoTexto.trim().toUpperCase() && numFila.includes(num.toLowerCase());
+        const reg = datos.find(row => {
+          const tf = (row[idxT]||'').trim().toUpperCase();
+          const nf = (row[idxN]||'').trim().toLowerCase();
+          return tf === tipoTexto.trim().toUpperCase() && nf.includes(num.toLowerCase());
         });
 
-        if (!registro) { alert('No se encontró ningún documento con ese número.'); refreshCaptcha(); return; }
+        if (!reg) {
+          alert('No se encontró ningún documento con ese número.');
+          refreshCaptcha();
+          return;
+        }
 
-        mostrarResultado(headers, registro, 'DETALLES DE ' + tipoTexto);
+        mostrarResultado(headers, reg, 'DETALLES DE ' + tipoTexto);
 
       } catch (err) {
         alert('Error: ' + err.message);
@@ -545,6 +501,9 @@
         refreshCaptcha();
       }
     }
+
+    // Inicializar captcha aleatorio
+    document.getElementById('captcha-text').textContent = randomCaptcha();
   </script>
 
 </body>

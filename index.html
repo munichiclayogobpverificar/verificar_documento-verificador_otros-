@@ -18,12 +18,7 @@
       border-bottom: 1px solid #ddd;
     }
     .navbar-left { display: flex; align-items: center; gap: 0.75rem; }
-    .navbar-back {
-      color: #1a7fd4;
-      font-size: 1.4rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
+    .navbar-back { color: #1a7fd4; font-size: 1.4rem; text-decoration: none; font-weight: bold; }
     .navbar-logo { height: 48px; }
     .navbar-brand { font-size: 0.85rem; color: #333; line-height: 1.3; }
     .navbar-brand strong { display: block; }
@@ -71,11 +66,7 @@
       flex-direction: column;
       gap: 1.1rem;
     }
-    .form-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    .form-row { display: flex; align-items: center; gap: 1rem; }
     .form-label {
       color: #1a7fd4;
       font-weight: bold;
@@ -97,12 +88,7 @@
     .form-control:focus { border-color: #1a7fd4; }
 
     /* CAPTCHA */
-    .captcha-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex: 1;
-    }
+    .captcha-row { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
     .captcha-box {
       background: #f5f5f5;
       border: 1.5px solid #bbb;
@@ -144,6 +130,99 @@
     }
     .btn-validar:hover { background: #1565b0; }
 
+    /* MSG ENCONTRADO */
+    .msg-encontrado {
+      color: #28a745;
+      font-weight: bold;
+      text-align: center;
+      font-size: 0.97rem;
+    }
+
+    /* ===== RESULTADO ===== */
+    #resultado-section {
+      display: none;
+      background: #f0f0f0;
+      padding: 2.5rem 2rem;
+    }
+
+    /* Contenedor que une barra roja + tabla */
+    .resultado-card {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .resultado-titulo {
+      background: #d40000;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.93rem;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      letter-spacing: 0.8px;
+      border-radius: 5px 5px 0 0;
+      border: 1px solid #b80000;
+      border-bottom: none;
+    }
+
+    .resultado-tabla-wrapper {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+      overflow: hidden;
+    }
+
+    .resultado-tabla {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .resultado-tabla tr {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .resultado-tabla tr:last-child {
+      border-bottom: none;
+    }
+
+    .resultado-tabla td {
+      padding: 0.8rem 1rem;
+      font-size: 0.87rem;
+      background: #fff;
+      color: #333;
+    }
+
+    /* Label col 1 */
+    .resultado-tabla td:nth-child(1) {
+      font-weight: bold;
+      color: #111;
+      width: 16%;
+      white-space: nowrap;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    /* Valor col 2 */
+    .resultado-tabla td:nth-child(2) {
+      width: 34%;
+      color: #444;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    /* Label col 3 */
+    .resultado-tabla td:nth-child(3) {
+      font-weight: bold;
+      color: #111;
+      width: 16%;
+      white-space: nowrap;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    /* Valor col 4 */
+    .resultado-tabla td:nth-child(4) {
+      width: 34%;
+      color: #444;
+    }
+
     /* FOOTER */
     .page-footer {
       background: #f5f5f5;
@@ -156,70 +235,6 @@
     }
     .footer-link { color: #1a7fd4; text-decoration: none; }
     .footer-link:hover { text-decoration: underline; }
-
-    .msg-encontrado {
-      color: #28a745;
-      font-weight: bold;
-      text-align: center;
-      font-size: 0.97rem;
-      margin-top: 0.25rem;
-    }
-    #resultado-section {
-      display: none;
-      background: #fff;
-      padding: 2rem 2rem;
-    }
-    .resultado-titulo {
-      background: #e00000;
-      color: #fff;
-      font-weight: bold;
-      font-size: 0.95rem;
-      text-align: center;
-      padding: 0.8rem 1rem;
-      letter-spacing: 0.5px;
-      border-radius: 6px;
-      margin-bottom: 1.2rem;
-    }
-    .resultado-tabla-wrapper {
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #fff;
-    }
-    .resultado-tabla {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .resultado-tabla tr {
-      border-bottom: 1px solid #ddd;
-    }
-    .resultado-tabla tr:last-child {
-      border-bottom: none;
-    }
-    .resultado-tabla td {
-      padding: 0.85rem 1rem;
-      font-size: 0.85rem;
-      color: #333;
-      background: #fff;
-    }
-    .resultado-tabla td.field-label {
-      font-weight: bold;
-      color: #111;
-      width: 16%;
-      white-space: nowrap;
-      border-right: 1px solid #ddd;
-    }
-    .resultado-tabla td.field-value {
-      color: #444;
-      width: 34%;
-    }
-    .resultado-tabla td.field-label:nth-child(3) {
-      border-left: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-    }
-    .resultado-tabla td.field-value:nth-child(4) {
-      border-left: none;
-    }
   </style>
 </head>
 <body>
@@ -242,7 +257,6 @@
   <!-- HERO + FORM -->
   <section class="hero">
     <h1 class="hero-title">Verifica tu Documento | MPCH</h1>
-
     <div class="form-card">
       <div class="form-header">
         Ingrese el tipo de documento y su número para visualizar el PDF asociado
@@ -277,27 +291,16 @@
 
         <div class="form-row">
           <label class="form-label" for="num-doc">Número Documento:</label>
-          <input
-            class="form-control"
-            type="text"
-            id="num-doc"
-            placeholder="🗒 Ingrese el número del documento"
-          />
+          <input class="form-control" type="text" id="num-doc" placeholder="🗒 Ingrese el número del documento" />
         </div>
 
         <div class="form-row">
           <label class="form-label" for="captcha-input">Captcha:</label>
           <div class="captcha-row">
-            <input
-              class="form-control"
-              type="text"
-              id="captcha-input"
-              placeholder="Ingrese el captcha"
-              style="max-width: 160px;"
-            />
+            <input class="form-control" type="text" id="captcha-input" placeholder="Ingrese el captcha" style="max-width:160px;" />
             <div class="captcha-box">
               <span id="captcha-text">6FSaiS</span>
-              <button class="refresh-btn" onclick="refreshCaptcha()" title="Refrescar captcha">&#x21BB;</button>
+              <button class="refresh-btn" onclick="refreshCaptcha()" title="Refrescar">&#x21BB;</button>
             </div>
           </div>
         </div>
@@ -311,11 +314,13 @@
 
   <!-- RESULTADO -->
   <section id="resultado-section">
-    <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL CARNET DE SALUD</div>
-    <div class="resultado-tabla-wrapper">
-      <table class="resultado-tabla" id="resultado-tabla">
-        <tbody></tbody>
-      </table>
+    <div class="resultado-card">
+      <div class="resultado-titulo" id="resultado-titulo">DETALLES DEL CARNET DE SALUD</div>
+      <div class="resultado-tabla-wrapper">
+        <table class="resultado-tabla" id="resultado-tabla">
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -329,9 +334,7 @@
     function randomCaptcha() {
       const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
       let s = '';
-      for (let i = 0; i < 6; i++) {
-        s += chars[Math.floor(Math.random() * chars.length)];
-      }
+      for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
       return s;
     }
 
@@ -342,60 +345,49 @@
 
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1dJgxa-919ArGsrmviwmO0zBZboZgPhlp2nBcmat1T-Q/gviz/tq?tqx=out:csv';
 
-    function mostrarResultado(headers, registro, tituloHoja) {
+    function mostrarResultado(headers, registro, titulo) {
       document.getElementById('msg-encontrado').style.display = 'block';
-      document.getElementById('resultado-titulo').textContent = tituloHoja.toUpperCase();
+      document.getElementById('resultado-titulo').textContent = titulo.toUpperCase();
 
       const tbody = document.querySelector('#resultado-tabla tbody');
       tbody.innerHTML = '';
 
-      // Filtrar columnas: excluir TIPO DE DOCUMENTO y NUMERO DE DOCUMENTO
       const excluir = ['TIPO DE DOCUMENTO', 'TIPO', 'NUMERO DE DOCUMENTO', 'NUMERO', 'NÚMERO'];
       const campos = headers
         .map((h, i) => [h.trim(), (registro[i] || '').trim()])
         .filter(([h]) => !excluir.includes(h.toUpperCase()));
 
-      // Mostrar en pares: label | valor | label | valor
       for (let i = 0; i < campos.length; i += 2) {
         const tr = document.createElement('tr');
-        const [label1, val1] = campos[i];
-        const [label2, val2] = campos[i + 1] || ['', ''];
-
-        const tdL1 = document.createElement('td'); tdL1.className = 'field-label'; tdL1.textContent = label1;
-        const tdV1 = document.createElement('td'); tdV1.className = 'field-value'; tdV1.textContent = val1;
-        const tdL2 = document.createElement('td'); tdL2.className = 'field-label'; tdL2.textContent = label2;
-        const tdV2 = document.createElement('td'); tdV2.className = 'field-value'; tdV2.textContent = val2;
-
-        tr.append(tdL1, tdV1, tdL2, tdV2);
+        const [l1, v1] = campos[i];
+        const [l2, v2] = campos[i + 1] || ['', ''];
+        ['td', 'td', 'td', 'td'].forEach((_, j) => {
+          const td = document.createElement('td');
+          td.textContent = [l1, v1, l2, v2][j];
+          tr.appendChild(td);
+        });
         tbody.appendChild(tr);
       }
 
-      const seccion = document.getElementById('resultado-section');
-      seccion.style.display = 'block';
-      seccion.scrollIntoView({ behavior: 'smooth' });
+      const sec = document.getElementById('resultado-section');
+      sec.style.display = 'block';
+      sec.scrollIntoView({ behavior: 'smooth' });
     }
 
     async function validarDocumento() {
-      const tipoSelect = document.getElementById('tipo-doc');
-      const tipo       = tipoSelect.value;
-      const tipoTexto  = tipoSelect.options[tipoSelect.selectedIndex].text;
-      const num        = document.getElementById('num-doc').value.trim();
+      const tipoSelect   = document.getElementById('tipo-doc');
+      const tipo         = tipoSelect.value;
+      const tipoTexto    = tipoSelect.options[tipoSelect.selectedIndex].text;
+      const num          = document.getElementById('num-doc').value.trim();
       const captchaInput = document.getElementById('captcha-input').value.trim();
       const captchaReal  = document.getElementById('captcha-text').textContent;
 
-      if (!tipo || !num || !captchaInput) {
-        alert('Por favor complete todos los campos.');
-        return;
-      }
-      if (captchaInput !== captchaReal) {
-        alert('Captcha incorrecto. Intente nuevamente.');
-        refreshCaptcha();
-        return;
-      }
+      if (!tipo || !num || !captchaInput) { alert('Por favor complete todos los campos.'); return; }
+      if (captchaInput !== captchaReal) { alert('Captcha incorrecto. Intente nuevamente.'); refreshCaptcha(); return; }
 
-      const btnValidar = document.querySelector('.btn-validar');
-      btnValidar.textContent = 'Buscando...';
-      btnValidar.disabled = true;
+      const btn = document.querySelector('.btn-validar');
+      btn.textContent = 'Buscando...';
+      btn.disabled = true;
       document.getElementById('resultado-section').style.display = 'none';
       document.getElementById('msg-encontrado').style.display = 'none';
 
@@ -403,13 +395,12 @@
         const resp = await fetch(SHEET_URL);
         if (!resp.ok) throw new Error('No se pudo acceder a la hoja.');
         const text = await resp.text();
-        const rows = text.split('\n').map(line =>
-          line.split(',').map(x => x.replace(/"/g, '').trim())
-        ).filter(r => r.some(c => c !== ''));
+        const rows = text.split('\n')
+          .map(line => line.split(',').map(x => x.replace(/"/g, '').trim()))
+          .filter(r => r.some(c => c !== ''));
 
         if (rows.length < 2) throw new Error('La hoja no tiene datos suficientes.');
 
-        // Detectar fila de encabezados automaticamente
         let headerIdx = rows.findIndex(row =>
           row.some(c => c.toUpperCase().includes('TIPO') || c.toUpperCase().includes('ESTADO') || c.toUpperCase().includes('NUMERO'))
         );
@@ -417,38 +408,33 @@
 
         const headers = rows[headerIdx];
         const datos   = rows.slice(headerIdx + 1).filter(r => r.some(c => c !== ''));
-
         if (datos.length === 0) throw new Error('La hoja no tiene filas de datos.');
 
-        // Indices de columnas clave
         const idxTipo = headers.findIndex(h => h.trim().toUpperCase().includes('TIPO'));
         const idxNum  = headers.findIndex(h => h.trim().toUpperCase().includes('NUMERO') || h.trim().toUpperCase().includes('NÚMERO'));
 
-        // Buscar fila donde TIPO DE DOCUMENTO y NUMERO DE DOCUMENTO coincidan
         const registro = datos.find(row => {
           const tipoFila = (row[idxTipo] || '').trim().toUpperCase();
           const numFila  = (row[idxNum]  || '').trim().toLowerCase();
-          const tipoUser = tipoTexto.trim().toUpperCase();
-          const numUser  = num.trim().toLowerCase();
-          return tipoFila === tipoUser && numFila.includes(numUser);
+          return tipoFila === tipoTexto.trim().toUpperCase() && numFila.includes(num.toLowerCase());
         });
 
-        if (!registro) {
-          alert('No se encontró ningún documento con ese número.');
-          refreshCaptcha();
-          return;
-        }
+        if (!registro) { alert('No se encontró ningún documento con ese número.'); refreshCaptcha(); return; }
 
         mostrarResultado(headers, registro, 'DETALLES DE ' + tipoTexto);
 
       } catch (err) {
-        alert('Error al consultar la hoja: ' + err.message + '\nVerifica que la hoja esté publicada en la web como CSV.');
+        alert('Error: ' + err.message);
       } finally {
-        btnValidar.textContent = 'Validar Documento';
-        btnValidar.disabled = false;
+        btn.textContent = 'Validar Documento';
+        btn.disabled = false;
         refreshCaptcha();
       }
     }
+  </script>
+
+</body>
+</html>
   </script>
 
 </body>

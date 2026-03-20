@@ -500,6 +500,33 @@
 
     // Inicializar captcha aleatorio
     document.getElementById('captcha-text').textContent = randomCaptcha();
+
+    // Leer parámetros de la URL y precargar el formulario
+    (function precargarDesdeURL() {
+      const params = new URLSearchParams(window.location.search);
+      const tipo   = params.get('tipo');
+      const num    = params.get('num');
+
+      if (tipo) {
+        const select = document.getElementById('tipo-doc');
+        // Buscar opción que coincida (insensible a mayúsculas)
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text.trim().toUpperCase() === tipo.trim().toUpperCase()) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      if (num) {
+        document.getElementById('num-doc').value = num;
+      }
+
+      // Si ambos vinieron en la URL, enfocar el captcha directamente
+      if (tipo && num) {
+        document.getElementById('captcha-input').focus();
+      }
+    })();
   </script>
 
 </body>

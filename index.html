@@ -509,9 +509,10 @@
 
       if (tipo) {
         const select = document.getElementById('tipo-doc');
-        // Buscar opción que coincida (insensible a mayúsculas)
+        const tipoBuscado = tipo.trim().toUpperCase().replace(/\s+/g, ' ');
         for (let i = 0; i < select.options.length; i++) {
-          if (select.options[i].text.trim().toUpperCase() === tipo.trim().toUpperCase()) {
+          const opcion = select.options[i].text.trim().toUpperCase().replace(/\s+/g, ' ');
+          if (opcion === tipoBuscado || opcion.includes(tipoBuscado) || tipoBuscado.includes(opcion)) {
             select.selectedIndex = i;
             break;
           }
@@ -522,7 +523,6 @@
         document.getElementById('num-doc').value = num;
       }
 
-      // Si ambos vinieron en la URL, enfocar el captcha directamente
       if (tipo && num) {
         document.getElementById('captcha-input').focus();
       }

@@ -222,6 +222,108 @@
     }
     .footer-link { color: #0057e7; text-decoration: none; }
     .footer-link:hover { text-decoration: underline; }
+
+    /* ===== RESPONSIVE MÓVIL ===== */
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 0.5rem 1rem;
+      }
+      .navbar-logo { height: 38px; }
+      .navbar-title { font-size: 0.95rem; }
+      .navbar-title span { font-size: 1.05rem; }
+
+      .hero {
+        padding: 1.5rem 0.75rem;
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .form-card {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      .form-header {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+        text-align: center;
+      }
+      .form-body {
+        padding: 1.2rem 1rem;
+        gap: 1rem;
+      }
+      .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+      .form-label {
+        min-width: unset;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+      .form-control {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.6rem 0.75rem;
+      }
+      .captcha-row {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+      }
+      .captcha-box {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.3rem;
+        letter-spacing: 6px;
+        padding: 0.6rem 1rem;
+      }
+      .captcha-box input {
+        width: 100%;
+      }
+      .btn-validar {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 6px;
+      }
+      .msg-encontrado {
+        font-size: 1rem;
+      }
+
+      #resultado-section {
+        padding: 1.5rem 1rem;
+      }
+      .resultado-titulo {
+        font-size: 0.85rem;
+        padding: 0.75rem 0.75rem;
+      }
+      .resultado-tabla td {
+        padding: 0.65rem 0.6rem;
+        font-size: 0.78rem;
+      }
+      .resultado-tabla td:nth-child(1),
+      .resultado-tabla td:nth-child(3) {
+        width: 30%;
+      }
+      .resultado-tabla td:nth-child(2),
+      .resultado-tabla td:nth-child(4) {
+        width: 20%;
+      }
+
+      .page-footer {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+        padding: 0.75rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
